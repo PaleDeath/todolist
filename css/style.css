@@ -1,4 +1,4 @@
-
+/* Reset CSS */
 * {
     margin: 0;
     padding: 0;
@@ -6,12 +6,14 @@
     font-family: Consolas, monospace, Arial, sans-serif;
 }
 
+/* Root Variables */
 :root {
     --color-primary: #5a78ff;
     --color-secondary: #0957ff;
 }
 
-body{
+/* Global Styles */
+body {
     position: relative;
     height: 100vh;
     display: flex;
@@ -19,7 +21,8 @@ body{
     align-items: center;
 }
 
-.author-text{
+/* Author Text Styles */
+.author-text {
     position: absolute;
     bottom: 0;
     left: 0;
@@ -30,24 +33,25 @@ body{
     text-align: center;
 }
 
-
+/* Container Styles */
 .container {
     display: flex;
     align-items: center;
     justify-content: center;
     flex-direction: column;
-    margin: 0 400px;
-    min-width: 500px;
+    margin: 0 20px; /* Adjust margins for small screens */
+    min-width: 500px; /* Minimum width for desktop */
     max-width: 1000px;
-    background: rgba( 255, 255, 255, 0.15 );
-    box-shadow: 0 8px 32px 0 rgba( 31, 38, 135, 0.3 );
-    backdrop-filter: blur( 3px );
-    -webkit-backdrop-filter: blur( 3px );
+    background: rgba(255, 255, 255, 0.15);
+    box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.3);
+    backdrop-filter: blur(3px);
+    -webkit-backdrop-filter: blur(3px);
     border-radius: 10px;
     border: 1px solid rgba(255, 255, 255, 0.18);
     padding: 20px;
 }
 
+/* Header Styles */
 .container header {
     display: flex;
     justify-content: center;
@@ -58,26 +62,28 @@ body{
 }
 
 header h1 {
-    font-size: 30px;
+    font-size: 30px; /* Default font size for PC screens */
     font-weight: 700;
     margin-bottom: 10px;
 }
 
-.alert-message{
+/* Alert Message Styles */
+.alert-message {
     width: 100%;
     transition: all 0.3s ease;
     transform: scale(0.9);
 }
 
-.alert-message.show{
+.alert-message.show {
     display: block;
     transform: scale(1);
 }
 
-.alert-message.hide{
+.alert-message.hide {
     display: none;
 }
 
+/* Input Section Styles */
 header .input-section {
     width: 100%;
     display: flex;
@@ -88,12 +94,13 @@ header .input-section {
     height: 100%;
 }
 
-.input-section input{
+.input-section input {
     margin-right: 10px;
     max-width: 100%;
 }
 
-.todos-filter{
+/* Todos Filter Styles */
+.todos-filter {
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -102,6 +109,7 @@ header .input-section {
     margin-bottom: 10px;
 }
 
+/* Todos List Styles */
 .todos-list {
     display: flex;
     flex-direction: column;
@@ -113,17 +121,17 @@ header .input-section {
     width: 100%;
 }
 
-.todos-list .todo-item{
+.todos-list .todo-item {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
     padding: 10px;
     width: 100%;
-    border-bottom: 1px solid rgba( 255, 255, 255, 0.18 );
+    border-bottom: 1px solid rgba(255, 255, 255, 0.18);
 }
 
-.todo-item p{
+.todo-item p {
     margin-right: 10px;
 }
 
@@ -136,57 +144,62 @@ header .input-section {
     height: 100%;
 }
 
-.todo-actions button:not(:last-child){
+.todo-actions button:not(:last-child) {
     margin-right: 10px;
 }
 
-.theme-switcher{
+/* Theme Switcher Styles */
+.theme-switcher {
     position: absolute;
     top: 16px;
     right: 16px;
 }
 
+/* Success Button Styles */
 .btn-success {
     display: none;
-  }
-  
-  .cloud-container {
+}
+
+/* Cloud Container Styles */
+.cloud-container {
     position: absolute;
-    top: 250px; /* Adjust the top position as needed */
+    top: 250px;
     left: 85%;
     transform: translateX(-50%);
     display: none;
     z-index: 1;
-  }
-  
-  .cloud-container img {
+}
+
+.cloud-container img {
     width: 100%;
     height: auto;
-    max-width: 200px; /* Adjust the maximum width as needed */
-  }
-  
+    max-width: 200px;
+}
 
-
+/* Reload Button Styles */
 .reload-button {
-  border: none;
-  background-color: transparent;
-  color: #000;
-  cursor: pointer;
+    border: none;
+    background-color: transparent;
+    color: #000;
+    cursor: pointer;
 }
 
 .reload-button i {
-  display: inline-block;
-  width: 20px;
-  height: 20px;
-  background-image: url("path/to/reload-icon.png"); /* Replace with your reload icon image path */
-  background-size: cover;
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    background-image: url("path/to/reload-icon.png"); /* Replace with your reload icon image path */
+    background-size: cover;
 }
 
-/* Responsive */
-@media only screen and (max-width: 530px) {
+/* Responsive Styles for Mobile */
+@media only screen and (max-width: 768px) {
     .container {
-        margin: 0 20px;
-        max-width: 96%;
-        min-width: 96%;
+        margin: 0 10px; /* Adjust margins for mobile */
+        min-width: 100%; /* Full width for mobile */
+    }
+
+    header h1 {
+        font-size: 24px; /* Adjust font size for mobile */
     }
 }
