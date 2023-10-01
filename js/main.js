@@ -1,10 +1,11 @@
 const task_input = document.querySelector("input");
-const date_input = document.querySelector(".schedule-date");
+const date_input = document.querySelector(".schedule-date"); // added date input
 const time_input = document.querySelector(".schedule-time");
 const add_btn = document.querySelector(".add-task-button");
 const todos_list_body = document.querySelector(".todos-list-body");
 const alert_message = document.querySelector(".alert-message");
 const delete_all_btn = document.querySelector(".delete-all-btn");
+
 
 let todos = JSON.parse(localStorage.getItem("todos")) || [];
 
@@ -15,6 +16,7 @@ window.addEventListener("DOMContentLoaded", () => {
   }
 });
 
+//get random unique id
 function getRandomId() {
   return (
     Math.random().toString(36).substring(2, 15) +
@@ -26,17 +28,17 @@ function addToDo(task_input, date_input) {
   let task = {
     id: getRandomId(),
     task: task_input.value,
-    dueDate: date_input.value,
-    dueTime: time_input.value,
+    dueDate: date_input.value, // added due date
+    dueTime: time_input.value, // added due time
     completed: false,
-    status: "pending",
+    status: "pending", // adding initial status as 'pending'
   };
   todos.push(task);
 }
 
 task_input.addEventListener("keyup", (e) => {
   if (e.keyCode === 13 && task_input.value.length > 0) {
-    addToDo(task_input, date_input);
+    addToDo(task_input, date_input); // Added date input
     saveToLocalStorage();
     task_input.value = "";
     showAllTodos();
@@ -47,11 +49,11 @@ add_btn.addEventListener("click", () => {
   if (task_input.value === "") {
     showAlertMessage("Please enter a task", "error");
   } else {
-    addToDo(task_input, date_input, time_input);
+    addToDo(task_input, date_input,time_input); // Added date input
     saveToLocalStorage();
     showAllTodos();
     task_input.value = "";
-    date_input.value = "";
+    date_input.value = ""; // Added date input
     time_input.value = "";
     showAlertMessage("Task added successfully", "success");
   }
@@ -59,6 +61,7 @@ add_btn.addEventListener("click", () => {
 
 delete_all_btn.addEventListener("click", clearAllTodos);
 
+//show all todos
 function showAllTodos() {
   todos_list_body.innerHTML = "";
   if (todos.length === 0) {
@@ -68,41 +71,49 @@ function showAllTodos() {
 
   todos.forEach((todo) => {
     todos_list_body.innerHTML += `
-      <tr class="todo-item" data-id="${todo.id}">
-        <td>${todo.task}</td>
-        <td>${todo.dueDate || "No due date"}</td>
-        <td>${todo.dueTime || "No due time"}</td>
-        <td>${todo.status}</td>
-        <td>
-          <button class="btn btn-warning btn-sm" onclick="editTodo('${todo.id}')">
-            <i class="bx bx-edit-alt bx-bx-xs"></i>
-          </button>
-          <button class="btn btn-success btn-sm" onclick="toggleStatus('${todo.id}')">
-            <i class="bx bx-check bx-xs"></i>
-          </button>
-          <button class="btn btn-error btn-sm" onclick="deleteTodo('${todo.id}')">
-            <i class="bx bx-trash bx-xs"></i>
-          </button>
-        </td>
-      </tr>
-    `;
+            <tr class="todo-item" data-id="${todo.id}">
+                <td>${todo.task}</td>
+                <td>${todo.dueDate || "No due date"}</td>
+                <td>${todo.dueTime || "No due time"}</td>
+                <td>${todo.status}</td>
+                <td>
+                    <button class="btn btn-warning btn-sm" onclick="editTodo('${
+                      todo.id
+                    }')">
+                        <i class="bx bx-edit-alt bx-bx-xs"></i>    
+                    </button>
+                    <button class="btn btn-success btn-sm" onclick="toggleStatus('${
+                      todo.id
+                    }')">
+                        <i class="bx bx-check bx-xs"></i>
+                    </button>
+                    <button class="btn btn-error btn-sm" onclick="deleteTodo('${
+                      todo.id
+                    }')">
+                        <i class="bx bx-trash bx-xs"></i>
+                    </button>
+                </td>
+            </tr>
+        `;
   });
 }
 
+//save todos to local storage
 function saveToLocalStorage() {
   localStorage.setItem("todos", JSON.stringify(todos));
 }
 
+//show alert message
 function showAlertMessage(message, type) {
   let alert_box = `
-    <div class="alert alert-${type} shadow-lg mb-5 w-full">
-      <div>
-        <span>
-          ${message}
-        </span>
-      </div>
-    </div>
-  `;
+        <div class="alert alert-${type} shadow-lg mb-5 w-full">
+            <div>
+                <span>
+                    ${message}
+                </span>
+            </div>
+        </div>
+    `;
   alert_message.innerHTML = alert_box;
   alert_message.classList.remove("hide");
   alert_message.classList.add("show");
@@ -112,6 +123,7 @@ function showAlertMessage(message, type) {
   }, 3000);
 }
 
+//delete todo
 function deleteTodo(id) {
   todos = todos.filter((todo) => todo.id !== id);
   saveToLocalStorage();
@@ -119,6 +131,7 @@ function deleteTodo(id) {
   showAllTodos();
 }
 
+//edit todo
 function editTodo(id) {
   let todo = todos.find((todo) => todo.id === id);
   task_input.value = todo.task;
@@ -131,6 +144,7 @@ function editTodo(id) {
   });
 }
 
+//clear all todos
 function clearAllTodos() {
   if (todos.length > 0) {
     todos = [];
@@ -145,19 +159,20 @@ function clearAllTodos() {
 function toggleStatus(id) {
   let todo = todos.find((todo) => todo.id === id);
   todo.completed = !todo.completed;
-  if (todo.completed) {
+  if(todo.completed) {
     todo.status = "completed";
     const jsConfetti = new JSConfetti();
-    jsConfetti.addConfetti();
-    const cloudContainer = document.querySelector(".cloud-container");
+  jsConfetti.addConfetti();
+  const cloudContainer = document.querySelector(".cloud-container");
     const completionGif = document.getElementById("completion-gif");
-
+    
     cloudContainer.style.display = "block";
 
+    // Hide the cloud container and GIF after 3 seconds
     setTimeout(() => {
       cloudContainer.style.display = "none";
     }, 7000);
-    const completionAudio = document.getElementById("completion-audio");
+  const completionAudio = document.getElementById("completion-audio");
     if (completionAudio) {
       completionAudio.play();
     }
@@ -183,10 +198,12 @@ function filterTodos(status) {
       break;
     case "completed":
       filteredTodos = todos.filter((todo) => todo.completed);
+      // Change the button text to "Revert" for completed tasks
       const buttons = document.querySelectorAll(".btn-success");
       buttons.forEach((button) => {
         button.textContent = "Revert";
       });
+      // Remove the "Complete" button for completed tasks
       const completeButtons = document.querySelectorAll(".btn-success");
       completeButtons.forEach((button) => {
         button.style.display = "none";
@@ -195,3 +212,43 @@ function filterTodos(status) {
   }
   displayTodos(filteredTodos);
 }
+
+
+
+function displayTodos(todosArray) {
+  todos_list_body.innerHTML = "";
+  if (todosArray.length === 0) {
+    todos_list_body.innerHTML = `<tr><td colspan="5" class="text-center">No task found</td></tr>`;
+    return;
+  }
+  todosArray.forEach((todo) => {
+    const isCompleted = todo.status === "completed";
+    const buttonText = isCompleted ? "Revert" : "Complete";
+
+    todos_list_body.innerHTML += `
+      <tr class="todo-item" data-id="${todo.id}">
+        <td>${todo.task}</td>
+        <td>${todo.dueDate || "No due date"}</td>
+        <td>${todo.dueTime || "No due time"}</td> <!-- Added due time -->
+        <td>${todo.status}</td>
+        <td>
+          <button class="btn btn-warning btn-sm" onclick="editTodo('${todo.id}')">
+            <i class="bx bx-edit-alt bx-bx-xs"></i>
+          </button>
+          ${isCompleted ? '' : `
+          <button class="btn btn-success btn-sm" onclick="toggleStatus('${todo.id}')">
+            <i class="bx bx-check bx-xs"></i>
+          </button>
+          `}
+          <button onclick="toggleStatus('${todo.id}')" class="reload-button">
+            <i class="bx bx-reset bx-xs"></i>
+          </button>
+          <button class="btn btn-error btn-sm" onclick="deleteTodo('${todo.id}')">
+            <i class="bx bx-trash bx-xs"></i>
+          </button>
+        </td>
+      </tr>
+    `;
+  });
+}
+
