@@ -5,14 +5,11 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!-- CSS -->
-    <link rel="stylesheet" href="css/style.css">
-
-    <!--- Tailwind CSS & Daisy UI CSS -->
+    <link rel="stylesheet" href="css/style.css" media="screen and (min-width: 769px)">
+    <link rel="stylesheet" href="css/style2.css" media="screen and (max-width: 768px)">
     <link href="https://cdn.jsdelivr.net/npm/daisyui@2.18.0/dist/full.css" rel="stylesheet" type="text/css" />
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2/dist/tailwind.min.css" rel="stylesheet" type="text/css" />
     <link href='https://unpkg.com/boxicons@2.1.2/css/boxicons.min.css' rel='stylesheet'>
-    <!-- Favicon -->
     <link rel="icon" href="res/favicon.svg">
     <title>Todo List</title>
     <audio id="completion-audio" src="js/gta.mp3.mp3"></audio>
@@ -22,7 +19,6 @@
     <div class="container">
         <header>
             <h1>Todo List</h1>
-            <!-- Error message -->
             <div class="alert-message"></div>
             <div class="input-section">
                 <input type="text" placeholder="Add a todo . . ." class="input input-bordered input-secondary w-full max-w-xs" />
@@ -69,7 +65,6 @@
     </div>
     
     <div class="theme-switcher">
-
         <div class="theme-item" theme="bumblebee">
           <div class="theme-thumb">
             <i class='bx bx-sun'></i> 
@@ -81,10 +76,8 @@
             <i class='bx bx-moon'></i>
           </div>
         </div>
-      
       </div>
 
-    <!-- JS -->
     <script src="js/main.js"></script>
     <script src="js/theme_switcher.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/js-confetti@latest/dist/js-confetti.browser.js"></script>
